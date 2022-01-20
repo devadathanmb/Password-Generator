@@ -1,0 +1,28 @@
+body{
+    background-color: #112031;
+}
+
+.heading-container{
+    text-align: center;
+    margin-top: 2rem;
+    color: #FEECE9;
+}
+
+.main-container{
+    text-align: left;
+    margin-top : 3rem;
+    color : white;
+}
+
+.form-row{
+    font-size: 1.5rem;
+    padding-top : 2rem;
+}
+
+.range{
+    width: 30rem;
+}
+
+label{
+    text-align: left;
+}
