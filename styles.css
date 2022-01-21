@@ -92,4 +92,7 @@ label{
     .rangebar{
         width: 100%;
     }
+    .password-field{
+        width: 100%;
+    }
 }
