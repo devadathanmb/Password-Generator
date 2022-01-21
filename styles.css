@@ -15,12 +15,12 @@ body{
 }
 
 .row-item{
-    font-size: 1.5rem;
-    padding-top : 2rem;
+    font-size: 1.3rem;
+    padding-top : 1.2rem;
 }
 
 .rangebar{
-    width: 30rem;
+    width: 40%;
 }
 
 label{
@@ -28,9 +28,13 @@ label{
 }
 
 .col-item{
-    padding-left: 22rem;
+    text-align: center;
 }
 
 .password-field{
     width: 50%;
+}
+
+.btn{
+    margin-left: 1rem;
 }
