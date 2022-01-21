@@ -3,11 +3,13 @@ let rangeBarValue = document.querySelector(".rangebar-value");
 rangeBarValue.innerHTML = rangeBar.value;
 let passwordLength = rangeBar.value;
 
+// Displaying the range value 
 rangeBar.addEventListener("input", function () {
     rangeBarValue.innerHTML = rangeBar.value;
     passwordLength = rangeBar.value;
 });
 
+//Password Keys
 const keys = {
     upperCase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     lowerCase: "abcdefghijklmnopqrstuvwxyz",
@@ -15,6 +17,7 @@ const keys = {
     symbol: "!@#$%^&*()_+~\\`|}{[]:;?><,./-="
 }
 
+//Array of functions 
 const getKey = [
     function upperCase() {
         return keys.upperCase.charAt(Math.floor(Math.random() * keys.upperCase.length));
@@ -30,6 +33,8 @@ const getKey = [
     }
 ];
 
+
+//Checkboxes
 let upperCaseCheckBox = document.querySelector(".upper-checkbox");
 let lowerCaseCheckBox = document.querySelector(".lower-checkbox");
 let numsCaseCheckBox = document.querySelector(".nums-checkbox");
@@ -48,6 +53,7 @@ generateButton.addEventListener("click", function () {
     generatePassword();
 });
 
+//Function to generate password
 function generatePassword() {
     if (upperCaseCheckBox.checked == false && lowerCaseCheckBox.checked == false && numsCaseCheckBox.checked == false && symbolsCaseCheckBox.checked == false) {
         passwordMsg.textContent = "Choose at least one checkbox below!";
@@ -70,19 +76,16 @@ function generatePassword() {
         }
     }
 
-    if(passwordLength >= 13){
+    if (passwordLength >= 13) {
         passwordMsg.textContent = "That's a great password!";
         passwordMsg.classList.add("password-msg-1");
-    }
-    else if(passwordLength >= 9){
+    } else if (passwordLength >= 9) {
         passwordMsg.textContent = "That's a good password!";
         passwordMsg.classList.add("password-msg-2");
-    }
-    else if(passwordLength >= 7){
+    } else if (passwordLength >= 7) {
         passwordMsg.textContent = "That's an okay password!";
         passwordMsg.classList.add("password-msg-3");
-    }
-    else{
+    } else {
         passwordMsg.textContent = "That's a weak password!";
         passwordMsg.classList.add("password-msg-4");
     }
@@ -90,10 +93,9 @@ function generatePassword() {
 }
 
 //Change color while moving range
-
 rangeBar.addEventListener("input", changeBarColor);
 
-function changeBarColor () {
+function changeBarColor() {
     if (passwordLength >= 13) {
         passwordField.style.backgroundColor = "#006400";
     } else if (passwordLength >= 9) {
@@ -108,7 +110,7 @@ function changeBarColor () {
 
 //Copy the password into clipboard
 let copyBtn = document.querySelector(".copy-btn");
-copyBtn.addEventListener("click", function(){
+copyBtn.addEventListener("click", function () {
     passwordField.select();
     passwordField.setSelectionRange(0, 99999);
     navigator.clipboard.writeText(passwordField.value);
