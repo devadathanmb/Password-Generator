@@ -8,6 +8,7 @@ p{
 
 label{
     text-align: left;
+    font-family: Montserrat, serif;
 }
 
 .heading-container{
@@ -108,4 +109,6 @@ label{
 .footer-text{
     margin : 5rem 5rem 1rem 5rem;
     font-size: 1rem;
+    font-family: Ubuntu, sans-serif;
+    font-weight: 400;
 }
