@@ -3,29 +3,29 @@ let rangeBarValue = document.querySelector(".rangebar-value");
 rangeBarValue.innerHTML = rangeBar.value;
 let passwordLength = rangeBar.value;
 
-rangeBar.addEventListener("input", function(){
+rangeBar.addEventListener("input", function () {
     rangeBarValue.innerHTML = rangeBar.value;
     passwordLength = rangeBar.value;
 });
 
 const keys = {
-    upperCase : "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    lowerCase : "abcdefghijklmnopqrstuvwxyz",
+    upperCase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    lowerCase: "abcdefghijklmnopqrstuvwxyz",
     number: "0123456789",
     symbol: "!@#$%^&*()_+~\\`|}{[]:;?><,./-="
-  }
+}
 
 const getKey = [
-    function upperCase(){
+    function upperCase() {
         return keys.upperCase.charAt(Math.floor(Math.random() * keys.upperCase.length));
     },
-    function lowerCase(){
+    function lowerCase() {
         return keys.lowerCase.charAt(Math.floor(Math.random() * keys.lowerCase.length));
     },
-    function number(){
+    function number() {
         return keys.number.charAt(Math.floor(Math.random() * keys.number.length));
     },
-    function symbol(){
+    function symbol() {
         return keys.symbol.charAt(Math.floor(Math.random() * keys.symbol.length));
     }
 ];
@@ -42,37 +42,74 @@ let generateButton = document.querySelector(".generate-btn");
 
 let password = "";
 
-generateButton.addEventListener("click", function(){
-    generatePassword();});
+let passwordMsg = document.querySelector(".password-msg");
 
-function generatePassword(){
-    if(upperCaseCheckBox.checked == false && lowerCaseCheckBox.checked == false && numsCaseCheckBox.checked == false && symbolsCaseCheckBox.checked == false){
-        console.log("So you want a password with none of these characters?");
+generateButton.addEventListener("click", function () {
+    generatePassword();
+});
+
+function generatePassword() {
+    if (upperCaseCheckBox.checked == false && lowerCaseCheckBox.checked == false && numsCaseCheckBox.checked == false && symbolsCaseCheckBox.checked == false) {
+        passwordMsg.textContent = "Choose at least one checkbox below!";
         return;
     }
     console.log("Works");
     passwordField.value = "";
     password = "";
-    while(password.length < passwordLength){
+    changeBarColor();
+    while (password.length < passwordLength) {
         let keyToAdd = getKey[Math.floor(Math.random() * getKey.length)];
-        if(keyToAdd.name == "upperCase" && upperCaseCheckBox.checked == true){
+        if (keyToAdd.name == "upperCase" && upperCaseCheckBox.checked == true) {
+            password += keyToAdd();
+        } else if (keyToAdd.name == "lowerCase" && lowerCaseCheckBox.checked == true) {
+            password += keyToAdd();
+        } else if (keyToAdd.name == "number" && numsCaseCheckBox.checked == true) {
+            password += keyToAdd();
+        } else if (keyToAdd.name == "symbol" && symbolsCaseCheckBox.checked == true) {
             password += keyToAdd();
         }
-        else if(keyToAdd.name == "lowerCase" && lowerCaseCheckBox.checked == true){
-            password+= keyToAdd();
-        }
-        else if(keyToAdd.name == "number" && numsCaseCheckBox.checked == true){
-            password+= keyToAdd();
-        }
-        else if(keyToAdd.name == "symbol" && symbolsCaseCheckBox.checked == true){
-            password+= keyToAdd();
-        }
+    }
+
+    if(passwordLength >= 13){
+        passwordMsg.textContent = "That's a great password!";
+        passwordMsg.classList.add("password-msg-1");
+    }
+    else if(passwordLength >= 9){
+        passwordMsg.textContent = "That's a good password!";
+        passwordMsg.classList.add("password-msg-2");
+    }
+    else if(passwordLength >= 7){
+        passwordMsg.textContent = "That's an okay password!";
+        passwordMsg.classList.add("password-msg-3");
+    }
+    else{
+        passwordMsg.textContent = "That's a weak password!";
+        passwordMsg.classList.add("password-msg-4");
     }
     passwordField.value = password;
 }
 
 //Change color while moving range
 
-// rangeBar.addEventListener("input", function(){
-//     rangeBar.style.backgroundColor = "e"
-// })
+rangeBar.addEventListener("input", changeBarColor);
+
+function changeBarColor () {
+    if (passwordLength >= 13) {
+        passwordField.style.backgroundColor = "#006400";
+    } else if (passwordLength >= 9) {
+        passwordField.style.backgroundColor = "#2E8B57";
+    } else if (passwordLength >= 7) {
+        passwordField.style.backgroundColor = "rgb(239, 194, 15)";
+    } else {
+        passwordField.style.backgroundColor = "rgb(223, 102, 97)";
+    }
+}
+
+
+//Copy the password into clipboard
+let copyBtn = document.querySelector(".copy-btn");
+copyBtn.addEventListener("click", function(){
+    passwordField.select();
+    passwordField.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(passwordField.value);
+})
