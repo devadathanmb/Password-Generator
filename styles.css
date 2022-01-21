@@ -1,5 +1,5 @@
 body{
-    background-color: #112031;
+    background-color: #0f0f0f;
 }
 
 p{
@@ -24,7 +24,7 @@ p{
 }
 
 .rangebar{
-    width: 40%;
+    width: 50%;
 }
 
 label{
@@ -83,4 +83,13 @@ label{
     font-size : 1rem;
     margin: 0;
     padding-top: 1rem;
+}
+
+@media (max-width: 436px){
+    .copy-btn{
+        margin-top: 1rem;
+    }
+    .rangebar{
+        width: 100%;
+    }
 }
